@@ -1,31 +1,46 @@
-import axios from 'axios'
-
-const getCode = async () => {
-  let result = ''
-  try {
-    result = await axios.get('/getCaptcha')
-    if (result.status === 200) {
-      return result.data
+import axios from '../util/requst'
+/**
+ *获取验证码接口
+ * @param  sid
+ */
+const getCode = (sid) => {
+  return axios.get('/getCaptcha', {
+    params: {
+      sid: sid
     }
-  } catch (e) {
-    console.log(e)
-  }
-  return result
+  })
+}
+/**
+ *找回密码接口
+ * @param {*} option
+ */
+const forget = () => {
+  return axios.post('/forget', {
+
+  })
+}
+/**
+ *登录接口
+ * @param {*} option
+ */
+const login = (option) => {
+  console.log(option)
+  return axios.post('/login/login', {
+    ...option
+  })
 }
 
-const forget = async option => {
-  let result = ''
-  try {
-    result = await axios.post('/forget', {
-      ...option
-    })
-    if (result.status === 200) {
-      return result.data
-    }
-  } catch (e) {
-    console.log(e)
-  }
-  return result
+const gitcs = (option) => {
+  console.log(13)
+  return axios.post('/login/cs', {
+    ...option
+  })
 }
 
-export { getCode, forget }
+// 注册接口
+const redylogin = (options) => {
+  return axios.post('/login/redylogin', {
+    ...options
+  })
+}
+export { getCode, forget, login, gitcs, redylogin }
