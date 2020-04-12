@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 const Login = () => import(/* webpackChunkName: 'login' */ './views/Login.vue')
 const Reg = () => import(/* webpackChunkName: 'reg' */ './views/Reg.vue')
+const Home = () => import(/* webpackChunkName: 'reg' */ './views/home.vue')
 const Forget = () =>
   import(/* webpackChunkName: 'forget' */ './views/Forget.vue')
 
@@ -10,6 +11,11 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
+    },
     {
       path: '/login',
       name: 'login',

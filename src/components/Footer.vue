@@ -1,8 +1,7 @@
 <template>
   <div class="fly-footer">
     <p>
-      <a href="http://fly.layui.com/" target="_blank">Imooc社区</a> 2017 &copy;
-      <a href="http://www.layui.com/" target="_blank">Imooc.com 出品</a>
+      <a href="/" target="_blank">问答社区</a> 2020 &copy;
     </p>
     <p>
       <a href="http://fly.layui.com/jie/3147/" target="_blank">付费计划</a>
