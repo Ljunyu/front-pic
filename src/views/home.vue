@@ -4,7 +4,7 @@
       <div class="layui-container">
           <div class="layui-row layui-col-space15">
               <div class="layui-col-md8">
-                  list
+                  <List></List>
               </div>
               <div class="layui-col-md4">
                   <Tips></Tips>
@@ -25,6 +25,7 @@ import HostList from '../components/sidebar/HostList'
 import Links from '../components/sidebar/Links'
 import Sign from '../components/sidebar/Sign'
 import Tips from '../components/sidebar/Tips'
+import List from '../components/contents/list'
 export default {
   name: 'home',
   components: {
@@ -33,7 +34,8 @@ export default {
     HostList,
     Links,
     Sign,
-    Tips
+    Tips,
+    List
   }
 
 }
