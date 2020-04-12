@@ -1,5 +1,5 @@
 import instanc from './alert.vue'
-let intensd = {}
+const intensd = {}
 intensd.install = (Vue) => {
   const Allercoment = Vue.extend(instanc)
   const inslo = new Allercoment()

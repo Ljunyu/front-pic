@@ -1,5 +1,5 @@
 import moban from './toast.vue'
-let intance = {}
+const intance = {}
 intance.install = (Vue) => {
   const newintance = Vue.extend(moban)
   // eslint-disable-next-line new-cap
