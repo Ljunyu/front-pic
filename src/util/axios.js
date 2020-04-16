@@ -5,6 +5,7 @@ class HttpRequest {
     console.log(this.baseURL)
     this.baseURL = baseURL
   }
+
   // 获取或者定义axios配置,比如生产还是开发环境
   gitInaxiosconfig () {
     const configs = {
@@ -16,6 +17,7 @@ class HttpRequest {
     }
     return configs
   }
+
   // 创建实例
   request (options) {
     const intercens = axios.create()
@@ -24,6 +26,7 @@ class HttpRequest {
     this.interceptors(intercens) // 先将请求拦截
     return intercens(newoptions)
   }
+
   // 添加拦截器
   interceptors (intercens) {
     // 添加请求拦截器
@@ -48,13 +51,14 @@ class HttpRequest {
     }
     )
   }
+
   // 添加get请求
   get (url, config) {
     console.log('get:', url, config)
     const options = Object.assign({
       method: 'get',
       url: url,
-      params: config.params
+      params: config
     })
     return this.request(options)
   }

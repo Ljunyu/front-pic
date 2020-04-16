@@ -1,18 +1,16 @@
 <template>
 <div>
-      <div class="panel">
+      <div class="panel fly-column">
           <div class="layui-container">
-              <ul>
-                  <li><a href="">首页</a></li>
-                  <li><a href="">提问</a></li>
-                  <li><a href="">分享</a></li>
-                  <li><a href="">讨论</a></li>
-                  <li><a href="">建议</a></li>
-                  <li><a href="">公告</a></li>
-                  <li><a href="">动态</a></li>
+              <ul >
+                 <router-link v-for="(item,index) in lists" :key='"pal"+index' tag="li" :to='item.path'>
+                    <a>{{item.name}}</a>
+                 </router-link>
                   <li><span class="shuxian"></span></li>
-                  <li><a href="">我发表的贴</a></li>
-                  <li><a href="">我收藏的贴</a></li>
+                  <template v-if='islogin==true'>
+                    <li><a href="">我发表的贴</a></li>
+                    <li><a href="">我收藏的贴</a></li>
+                  </template>
               </ul>
               <div class="serach">
                 <span class="layui-icon layui-icon-search"></span>
@@ -24,8 +22,50 @@
 </template>
 
 <script>
+
 export default {
-  name: 'Panel'
+  name: 'Panel',
+  data () {
+    return {
+      lists: [
+        {
+          name: '首页',
+          istrue: false,
+          path: '/'
+        },
+        {
+          name: '提问',
+          istrue: false,
+          path: '/index/ask'
+        },
+        {
+          name: '分享',
+          istrue: false,
+          path: '/index/share'
+        },
+        {
+          name: '讨论',
+          istrue: false,
+          path: '/index/discuss'
+        },
+        {
+          name: '建议',
+          istrue: false,
+          path: '/index/advise'
+        },
+        {
+          name: '公告',
+          istrue: false,
+          path: '/index/notice'
+        }
+
+      ],
+      islogin: this.$store.state.islogin
+    }
+  },
+  mounted () {
+    console.log(this.lists)
+  }
 }
 </script>
 

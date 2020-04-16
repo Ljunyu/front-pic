@@ -4,6 +4,7 @@ class httpAxios {
   constructor (basurl) {
     this.basurl = basurl
   }
+
   peizhi () {
     const confit = {
       baseURL: this.basurl,
@@ -12,12 +13,14 @@ class httpAxios {
     }
     return confit
   }
+
   request (option) {
     const instance = axios.create(this.confit)
     const newinstance = Object.assign(option, this.peizhi)
     this.interceptors(instance)
     return instance(newinstance)
   }
+
   interceptors (instance) {
     instance.Interceptors.request.use((res) => {
 
@@ -30,6 +33,7 @@ class httpAxios {
       console.log(err)
     })
   }
+
   post (url, option) {
     const config = {
       data: option,
@@ -38,6 +42,7 @@ class httpAxios {
     }
     return this.request(config)
   }
+
   get (url, config) {
     const option = {
       method: 'get',
