@@ -32,7 +32,7 @@
                 </div>
                 <div class="layui-form-item">
                   <label for="L_pass" class="layui-form-label">密码</label>
-                  <validation-provider rules="required|min:6" v-slot="{errors}">
+                  <validation-provider rules="required|min:6|max:16" v-slot="{errors}">
                     <div class="layui-input-inline">
                       <input
                         type="password"
@@ -100,7 +100,7 @@
 <script>
 import { getCode, login, gitcs } from '../api/login'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import uuidv4 from 'uuid/v4'
+import { v4 as uuidv4 } from 'uuid'
 export default {
   name: 'login',
   components: {
@@ -125,7 +125,6 @@ export default {
       localStorage.setItem('sid', sid)
       this.$store.state.uuid = sid
     }
-    console.log(1111, this.$store.state.uuid)
     this._getCode()
   },
   methods: {
@@ -156,12 +155,15 @@ export default {
       }
       console.log(params)
       login(params).then((res) => {
+        console.log(3333, res, res.data, res.code === 200)
         if (res.code === 200) {
-          console.log('成功')
+          this.$store.commit('setuserinfo', res.data)
+          this.$store.commit('setToken', res.token)
+          this.$router.push({ name: 'Index' })
         }
       }).catch((err) => {
-        const data = err.response.data
-        if (data.code === 500) {
+        console.log(11111222, err)
+        if (err.response.data.code === 500) {
           this.$alert('用户名或密码校验失败')
         } else {
           this.$alert('服务器错误')

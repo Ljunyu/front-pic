@@ -1,0 +1,51 @@
+{
+  "id": "1913385",
+  "name": "pic",
+  "font_family": "iconfont-pic",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "182642",
+      "name": "其他",
+      "font_class": "qita",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "400020",
+      "name": "主页",
+      "font_class": "htmal5icon06",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "741860",
+      "name": "个人 (3)",
+      "font_class": "geren3",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "5323819",
+      "name": "运营管理_帖子管理",
+      "font_class": "yunyingguanli_tieziguanli",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "10262050",
+      "name": "设 置",
+      "font_class": "shezhi",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "13744073",
+      "name": "信息",
+      "font_class": "xinxi",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    }
+  ]
+}

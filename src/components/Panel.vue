@@ -14,7 +14,7 @@
               </ul>
               <div class="serach">
                 <span class="layui-icon layui-icon-search"></span>
-                <a href="">发布新贴</a>
+                <router-link class="fab" :to="{name:'addposts'}">发布新贴</router-link>
               </div>
           </div>
       </div>
@@ -70,6 +70,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.fab{
+       background-color: rgb(95, 184, 120);
+}
 .panel{
     background-color: #fff;
     height: 50px;
@@ -108,7 +111,6 @@ ul{
     }
     a {
         padding: 10px 20px;
-        background:  rgb(9, 92, 57);
         color: #fff;
         border-radius: 3px;
     }

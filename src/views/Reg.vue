@@ -53,7 +53,7 @@
                   </Validation-provider>
                 </div>
                 <div class="layui-form-item">
-                   <Validation-provider  rules="required|min:6|confirmed:confirmation"  v-slot="{errors}" >
+                   <Validation-provider  rules="required|min:6|confirmed:confirmation|max:16"  v-slot="{errors}" >
                   <div class="layui-row">
                     <label for="L_pass" class="layui-form-label">密码</label>
                     <div class="layui-input-inline">

@@ -39,8 +39,14 @@ export default {
       listis: []
     }
   },
+  watch: {
+    '$route' (newwal, oldwal) {
+      console.log(111, this.$route.params.catlog)
+    }
+  },
   methods: {
     filter (key) {
+      console.log(111, key)
       switch (key) {
         case 0:
           this.ischek = ''
@@ -82,11 +88,12 @@ export default {
       }
       getlist(options).then((res) => {
         if (res.code === 200) {
-          if (res.data.length === 0) {
-            this.listis = res.data
-          } else {
-            this.listis = res.data.concat(res.data)
-          }
+          // if (res.data.length === 0) {
+          //   this.listis = res.data
+          // } else {
+          //   this.listis = res.data.concat(res.data)
+          // }
+           this.listis = res.data
         }
       }).catch((err) => {
         console.log(err)
