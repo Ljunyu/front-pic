@@ -7,14 +7,14 @@
         <ul class="mine-msg">
           <li v-for="(item,index) in lists" :key="'comments' + index">
             <blockquote class="layui-elem-quote">
-              <a href="/jump?username=Absolutely" target="_blank">
+              <a >
                 <cite>{{item.cuid.name}}</cite>
               </a>回答了您的求解
-              <a target="_blank" href="/jie/8153.html/page/0/#item-1489505778669">
+              <a >
                 <cite>{{item.title}}</cite>
               </a>
             </blockquote>
-            <div v-richtext="item.content"></div>
+            <div class="imags" v-richtext="item.content"></div>
             <p>
               <span>{{ item.created | moment}}</span>
               <a
@@ -29,9 +29,6 @@
           v-show="total > 0"
           :total="total"
           :current="page"
-          :align="'left'"
-          :hasTotal="true"
-          :hasSelect="true"
           @changeCurrent="handleChange"
         ></imooc-page>
       </div>
@@ -41,7 +38,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import { getMsg } from '@/api/user'
+import { getMsg, setMsg } from '../../api/user'
 import Pagination from '../moudl/page/index'
 export default {
   name: 'user-msg',
@@ -65,72 +62,15 @@ export default {
     num: (state) => (state.num.message ? state.num.message : 0)
   }),
   methods: {
-    //         send () {
-    //             this.list.push({ name: this.name, extend: 'msg', msg: this.inputvalue })
-    //             this.ws.send(JSON.stringify({ name: this.name, extend: 'msg', msg: this.inputvalue }))
-    //             this.inputvalue = ''
-    //         },
-    //         deled () {
-    //             this.ws.close()
-    //         },
-    //         onopen () {
-    //              console.log('111连接', this.ws.readyState)
-    //              this.ws.send(JSON.stringify({ extend: 'auth', message: 'Bearer ' + this.$store.state.token }))
-    //          },
-    //         onmessage (extend) {
-    //             if (this.isshow) {
-    //                 return
-    //             }
-    //             var jsonmsg = JSON.parse(extend.data)
-    //             this.number = jsonmsg.num
-    //             switch (jsonmsg.extend) {
-    //                     case 'noauth':
-    //                        // 路由跳转到登录页面
-    //                     break
-    //                     case 'enter':
-    //                         this.list.push({ name: '系统', msg: '欢迎' + jsonmsg.name + '进入聊天室' })
-    //                     break
-    //                     case 'out':
-    //                         this.list.push({ name: '系统', msg: '用户' + jsonmsg.name + '退出聊天室' })
-    //                     break
-    //                     case 'heartbeast':
-    //                         this.checkout()
-    //                         this.ws.send(JSON.stringify({ extend: 'heartbeast', message: 'pong' }))
-    //                     break
-    //                 default:
-    //                     if (jsonmsg.name !== this.name) {
-    //                         this.list.push({ name: jsonmsg.name, msg: jsonmsg.msg })
-    //                     }
-    //                     break
-    //             }
-    //         },
-    //         onclose () {
-    //             this.ws.close()
-    //             console.log('已经关闭连接', this.ws.readyState)
-    //         },
-    //         onerror () {
-    //             setTimeout(function () {
-    //                 this.init()
-    //             }, 20000)
-    //             console.log(1121313, this.ws.readyState)
-    //         },
-    //   init () {
-    //     // ${this.protocol}://${this.url}:${this.port}
-    //    this.ws = new WebSocket('ws://127.0.0.1:3001')
-    //             this.ws.onopen = this.onopen
-    //             this.ws.onmessage = this.onmessage
-    //             this.ws.onclose = this.onclose
-    //             this.ws.onerror = this.onerror
-    // },
     clearAll () {
-      // setMsg().then((res) => {
-      //   if (res.code === 200) {
-      //     // 清空所有消息
-      //     this.lists = []
-      //     this.$store.commit('setMessage', { message: 0 })
-      //     this.total = 0
-      //   }
-      // })
+      setMsg().then((res) => {
+        if (res.code === 200) {
+          // 清空所有消息
+          this.lists = []
+          this.$store.commit('setMessage', { message: 0 })
+          this.total = 0
+        }
+      })
     },
     clear (item) {
       // setMsg({ id: item._id }).then((res) => {
@@ -149,7 +89,7 @@ export default {
       }).then((res) => {
         if (res.code === 200) {
           this.lists = res.data
-          // this.total = res.total
+          this.total = this.$store.state.num
         }
       })
     },
@@ -162,4 +102,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.imags{
+  img{
+  max-width: 100%!important;
+
+  }
+}
 </style>

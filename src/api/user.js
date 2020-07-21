@@ -27,7 +27,12 @@ const getinfo = () => {
 const getMsg = (option) => {
   return axios.get('/user/getMsg', option)
 }
-
+const getnum = (option) => {
+  return axios.get('/user/getnum', option)
+}
+const setMsg = (option) => {
+  return axios.get('/user/setMsg', option)
+}
 export {
   usersign,
   basic,
@@ -35,5 +40,7 @@ export {
   filepic,
   updatename,
   getinfo,
-  getMsg
+  getMsg,
+  getnum,
+  setMsg
 }

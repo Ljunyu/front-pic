@@ -2,7 +2,7 @@ import store from '../store'
 class WebSockets {
     constructor (config = {}) {
         const defautConfig = {
-            url: '127.0.0.1',
+            url: '106.13.53.240',
             port: '3001',
             protocol: 'ws'
         }
@@ -19,7 +19,6 @@ class WebSockets {
 
     init () {
         console.log(123321)
-        // ws://127.0.0.1:3001
         this.ws = new WebSocket(`${this.protocol}://${this.url}:${this.port}`)
         this.ws.onopen = this.onopen
         this.ws.onmessage = this.onmessage

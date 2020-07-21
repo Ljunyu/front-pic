@@ -1,10 +1,9 @@
 <template>
-<div>
-  <Panel></Panel>
-  <router-view></router-view>
-</div>
+  <div>
+    <Panel></Panel>
+    <router-view></router-view>
+  </div>
 </template>
-
 <script>
 import Panel from '../components/Panel'
 export default {
@@ -27,5 +26,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

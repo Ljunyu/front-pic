@@ -11,7 +11,7 @@ export default new Vuex.Store({
     userinfo: '',
     detail: '',
     ws: null,
-    num: '' // websocket传入 有几条未读消息
+    num: 0 // websocket传入 有几条未读消息
   },
   mutations: {
     initWebsocket (state, config) {
@@ -43,6 +43,9 @@ export default new Vuex.Store({
     setMessage (state, value) {
       state.num = value.number ? value.number : 0
         console.log(112112, value)
+    },
+    setnums (state, value) {
+      state.num = value || 0
     }
   },
   actions: {

@@ -1,16 +1,14 @@
 <template>
   <div class="fly-header layui-bg-black">
-
     <div class="layui-container">
-      <a class="fly-logo" href="/">
+      <!-- <a class="fly-logo" href="/">
         <img src="../assets/logo-2.png" alt="layui" />
-      </a>
+      </a>-->
       <ul class="layui-nav fly-nav layui-hide-xs">
         <li class="layui-nav-item layui-this">
           <a href="/">
             <i class="iconfont icon-jiaoliu"></i>
-
-    交流
+            交流
           </a>
         </li>
         <li class="layui-nav-item">
@@ -39,47 +37,62 @@
           </li>
           <li class="layui-nav-item layui-hide-xs">
             <a
+              class="iconfont icon-qq"
               href
               onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})"
               title="QQ登入"
-              class="iconfont icon-qq"
             ></a>
           </li>
           <li class="layui-nav-item layui-hide-xs">
             <a
+              class="iconfont icon-weibo"
               href
               onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})"
               title="微博登入"
-              class="iconfont icon-weibo"
             ></a>
           </li>
         </template>
         <!-- 登入后的状态 -->
         <template v-else>
-        <li class="layui-nav-item" @mouseover="sethover()" @mouseleave="downhover()">
-          <a class="fly-nav-avatar">
-            <cite class="layui-hide-xs">{{userinfo.name}}</cite>
-            <i class="iconfont icon-renzheng layui-hide-xs" ></i>
-              <i v-show="userinfo.isvip!==0" class="layui-badge fly-badge-vip layui-hide-xs">{{'VIP'+userinfo.isvip}}</i>
-            <img :src="pic">
-          </a>
-          <dl class="layui-nav-child layui-anim layui-anim-upbit" :class="{'layui-show':ishover}" >
-            <dd><router-link :to="{name:'myinfo'}"><i class="layui-icon">&#xe620;</i>基本设置</router-link></dd>
-             <dd><router-link :to="{name:'usermsg'}"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</router-link></dd>
-            <dd><a href="user/home.html"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
-            <dd><a @click='lagout()' style="text-align: center;">退出</a></dd>
-          </dl>
-        </li>
-        <div class="fly-nav-msg">
-              {{num}}
-        </div>
-          <transition  name='fade'>
-               <div v-show="hasmsg" class="layui-layer-tips">
-                <div class="layui-layer-content">
-                  您有{{num}}条未读消息
-                  <i class="layui-layer-TipsG layui-layer-TipsB" ></i>
-                </div>
+          <li @mouseleave="downhover()" @mouseover="sethover()" class="layui-nav-item">
+            <a class="fly-nav-avatar">
+              <cite class="layui-hide-xs">{{userinfo.name}}</cite>
+              <i class="iconfont icon-renzheng layui-hide-xs"></i>
+              <i
+                class="layui-badge fly-badge-vip layui-hide-xs"
+                v-show="userinfo.isvip!==0"
+              >{{'VIP'+userinfo.isvip}}</i>
+              <img :src="pic" />
+            </a>
+            <dl :class="{'layui-show':ishover}" class="layui-nav-child layui-anim layui-anim-upbit">
+              <dd>
+                <router-link :to="{name:'myinfo'}">
+                  <i class="layui-icon">&#xe620;</i>基本设置
+                </router-link>
+              </dd>
+              <dd>
+                <router-link :to="{name:'usermsg'}">
+                  <i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息
+                </router-link>
+              </dd>
+              <dd>
+                <a href="user/home.html">
+                  <i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页
+                </a>
+              </dd>
+              <dd>
+                <a @click="lagout()" style="text-align: center;">退出</a>
+              </dd>
+            </dl>
+          </li>
+          <div class="fly-nav-msg">{{num}}</div>
+          <transition name="fade">
+            <div class="layui-layer-tips" v-show="hasmsg">
+              <div class="layui-layer-content">
+                您有{{num}}条未读消息
+                <i class="layui-layer-TipsG layui-layer-TipsB"></i>
               </div>
+            </div>
           </transition>
         </template>
       </ul>
@@ -89,6 +102,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { getnum } from '../api/user'
 export default {
   name: 'Header',
   data () {
@@ -119,6 +133,15 @@ export default {
       this.$router.push('/')
     }
   },
+  mounted () {
+    if (this.$store.state.islogin === true) {
+      getnum().then((res) => {
+        if (res.code === 200) {
+          this.$store.commit('setnums', res.data)
+        }
+      })
+    }
+  },
   watch: {
     num (old, news) {
       if (old !== news) {
@@ -130,9 +153,9 @@ export default {
     }
   },
   computed: {
-   ...mapState({
-        num: state => state.num
-   }),
+    ...mapState({
+      num: state => state.num
+    }),
     isshow () {
       return this.$store.state.islogin
     },
@@ -144,8 +167,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.layui-layer-tips{
-  position: fixed;
+.layui-layer-tips {
+  position: absolute;
   white-space: nowrap;
   top: 60px;
   right: 10px;

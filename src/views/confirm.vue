@@ -40,7 +40,7 @@ export default {
       updatename({ key: obj.key, username: this.username }).then((res) => {
         if (res.code === 200) {
           this.issend = true
-          this.$alert('已更新，请重新登录')
+          this.$alert('已更新，两秒后跳转登录')
           localStorage.clear('userinfo')
           this.$$store.commit('setuserinfo', '')
           setTimeout(() => {

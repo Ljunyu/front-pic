@@ -185,7 +185,10 @@ export default {
       }
       redylogin(options).then((res) => {
         if (res.code === 200) {
-          this.$rooter.push('/login')
+          this.$alert('注册成功，跳转登录')
+          setTimeout(() => {
+            this.$router.push({ path: '/login' })
+          }, 1000)
         } else {
           console.log(res.msg)
           this.$refs.observer.setErrors(res.msg)
